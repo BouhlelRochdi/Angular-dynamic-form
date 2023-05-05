@@ -1,0 +1,37 @@
+<ng-container *ngIf="field" [formGroup]="form">
+    <ng-container [ngSwitch]="field.controlType.value">
+
+        <div *ngSwitchCase="'textbox'">
+            <label [for]="field.label">{{field.label}}</label>
+            <input [formControlName]="field.key" [id]="field.key" [type]="field.type"
+                (ngModelChange)="ngOnChanges($event)">
+            <div *ngIf="form.controls[field.key].dirty && form.controls[field.key].invalid">
+                <div>
+                    <p style="color: red"><b>{{errorMessage}}</b></p>
+                </div>
+            </div>
+        </div>
+
+        <div *ngSwitchCase="'numberbox'">
+            <input [formControlName]="field.key" [id]="field.key" [type]="field.type" (ngModelChange)="ngOnChanges($event)">
+            <div *ngIf="form.controls[field.key].dirty && form.controls[field.key].invalid">
+                <p style="color: red"><b>{{errorMessage}}</b></p>
+            </div>
+        </div>
+
+        <div *ngSwitchCase="'password'">
+            <input [formControlName]="field.key" [id]="field.key" [type]="field.type">
+        </div>
+
+
+        <div *ngSwitchCase="'dropdown'">
+            <label [for]="field.label">{{field.label}}</label>
+            <app-form-field-dropdown [parentForm]="form" [field]="field"></app-form-field-dropdown>
+            <div *ngIf="form.controls[field.key].touched && form.controls[field.key].invalid">
+                <p style="color: red"><b>{{errorMessage}}</b></p>
+            </div>
+        </div>
+
+        <!-- {{form.controls[this.field.key].errors | json}} -->
+    </ng-container>
+</ng-container>

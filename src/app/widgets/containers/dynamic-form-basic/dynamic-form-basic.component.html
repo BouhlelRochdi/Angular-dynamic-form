@@ -1,0 +1,21 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form" [id]="formId" #dForm="ngForm">
+    <div class="p-grid">
+        <!-- call dynamic profile -->
+        <div *ngFor="let field of fields; let index =index">
+            <app-form-fields [field]="field" [form]="form"></app-form-fields>
+        </div>
+
+        <!-- button section  -->
+        <div *ngIf="fields.length > 0 && submitLabel !== 'none'" class="ms-form-button p-col-fixed ">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">{{submitLabel}}</button>
+        </div>
+        <div>
+            <ng-content select="[c-buttons-section]"></ng-content>
+        </div>
+        <!-- button section end -->
+    </div>
+</form>
+
+<div *ngIf="payLoad" class="form-row">
+    <strong>Saved the following values</strong><br> {{payLoad}}
+</div>

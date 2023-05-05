@@ -1,0 +1,12 @@
+<p>dunamic-profile works!</p>
+
+<div>
+    <app-dynamic-form-basic #bForm [fields]="profileFields" (onSave)="saveProfile($event)">    
+    </app-dynamic-form-basic>
+</div>
+  
+  <div>
+    <!-- <button class="margin-left5" mat-mini-fab aria-label="Add" color="accent" [disabled]="!bForm.dForm?.valid"
+      (click)="bForm.dForm.ngSubmit.emit()"> save
+    </button> -->
+  </div>
