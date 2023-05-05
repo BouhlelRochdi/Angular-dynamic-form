@@ -7,7 +7,7 @@
                 (ngModelChange)="ngOnChanges($event)">
             <div *ngIf="form.controls[field.key].dirty && form.controls[field.key].invalid">
                 <div>
-                    <p style="color: red"><b>{{errorMessage}}</b></p>
+                    <p style="color: red">{{errorMessage}}</p>
                 </div>
             </div>
         </div>
@@ -16,7 +16,7 @@
             <input [formControlName]="field.key" [id]="field.key" [type]="field.type"
                 (ngModelChange)="ngOnChanges($event)">
             <div *ngIf="form.controls[field.key].dirty && form.controls[field.key].invalid">
-                <p style="color: red"><b>{{errorMessage}}</b></p>
+                <p style="color: red">{{errorMessage}}</p>
             </div>
         </div>
 
@@ -24,7 +24,7 @@
             <input [formControlName]="field.key" [id]="field.key" [type]="field.type"
                 (ngModelChange)="ngOnChanges($event)">
             <div *ngIf="form.controls[field.key].touched && form.controls[field.key].invalid">
-                <p style="color: red"><b>{{errorMessage}}</b></p>
+                <p style="color: red">{{errorMessage}}</p>
             </div>
         </div>
 
@@ -32,7 +32,7 @@
             <input [formControlName]="field.key" [id]="field.key" [type]="field.type"
                 (ngModelChange)="ngOnChanges($event)">
             <div *ngIf="form.controls[field.key].touched && form.controls[field.key].invalid">
-                <p style="color: red"><b>{{errorMessage}}</b></p>
+                <p style="color: red">{{errorMessage}}</p>
             </div>
         </div>
 
@@ -42,7 +42,7 @@
             <app-form-field-dropdown [parentForm]="form" [field]="field"
                 (ngModelChange)="ngOnChanges($event)"></app-form-field-dropdown>
             <div *ngIf="form.controls[field.key].touched && form.controls[field.key].invalid">
-                <p style="color: red"><b>{{errorMessage}}</b></p>
+                <p style="color: red">{{errorMessage}}</p>
             </div>
         </div>
 
@@ -52,7 +52,7 @@
             (ngModelChange)="ngOnChanges($event)" (change)="updateForm($event)"></app-form-field-files>
             <!-- <input [type]="field.type" [formControlName]="field.key" [id]="field.key" [name]="field.key" accept="image/png, image/jpeg"> -->
             <div *ngIf="form.controls[field.key].touched && form.controls[field.key].invalid">
-                <p style="color: red"><b>{{errorMessage}}</b></p>
+                <p style="color: red">{{errorMessage}}</p>
             </div>
         </div>
 

@@ -16,9 +16,8 @@ export class DynamicFormBasicComponent {
 
   @ViewChild('dForm', { static: false }) dForm!: NgForm;
   public form!: FormGroup;
-  initialForm!: FormGroup;
   payLoad = '';
-  formData!: FormData;
+  formData: FormData = new FormData();
   isFormData: boolean = false;
 
   @Input() submitLabel = 'Submit';
@@ -42,8 +41,6 @@ export class DynamicFormBasicComponent {
 
   initForm() {
     this.form = this.toFormsControlService.toFormGroup(this.fields);
-    this.initialForm = this.toFormsControlService.toFormGroup(this.fields);
-    let inputData;
     this.form.valueChanges.pipe()
       .subscribe((next) => {
         this.onFormChange.emit(next);
@@ -53,21 +50,29 @@ export class DynamicFormBasicComponent {
 
   onSubmit() {
     this.payLoad = JSON.stringify(this.form.value);
+    // if(this.form.hasOwnProperty('files')){
+      // for (const [key, val] of Object.entries(this.form.value)) {
+      //   console.log(`${key}: ${val}`);
+      //   // this.formData.append(key, val);
+      // }
+    // }
+    for (const pair of this.formData.entries()) {
+      console.log(`${pair[0]}, ${pair[1]}`);
+    }
     this.onSave.emit(this.form.value);
   }
 
   changeValueForm(event: any){
-    console.log('event: ', event.target.id);
+    console.log('event: ', event.target.files[0]);
     
     if(event.target.id == 'file'){
+      this.formData = new FormData();
+      this.formData.append('file', event.target.files[0]);
+      console.log('formData: ', this.formData);
       this.form.controls['file'].setValue(event.target.files[0]);
       // this.form?.get('file')?.setValue(event.target.files[0]); 
     }
-    if(this.form.hasOwnProperty('files')){
-      for (const [key, val] of Object.entries(this.initialForm.value)) {
-        console.log(`${key}: ${val}`);
-        // this.formData.append(key, val);
-      }
-    }
+    
+
   }
 }
