@@ -18,6 +18,14 @@ export class DunamicProfileComponent {
   saveProfile(data: any) {
     console.log('data in profile component: ', data);
     // this.updateProfile.emit(data);
+    // data.entries
+  }
+
+  onFormChange(event: any) {
+    // if (event.target.id == 'file') {
+    //   console.log('file in profile component: ', event.target.files[0]);
+    // }
+    console.log('data in profile component: ', event.target.value);
   }
 
 }

@@ -10,5 +10,6 @@ export enum FieldType {
     chips = 'chips',
     multiselection = 'multiselection',
     iconpicker = 'iconpicker',
+    file = 'file',
     custom = 'custom'
 }

@@ -13,20 +13,44 @@
         </div>
 
         <div *ngSwitchCase="'numberbox'">
-            <input [formControlName]="field.key" [id]="field.key" [type]="field.type" (ngModelChange)="ngOnChanges($event)">
+            <input [formControlName]="field.key" [id]="field.key" [type]="field.type"
+                (ngModelChange)="ngOnChanges($event)">
             <div *ngIf="form.controls[field.key].dirty && form.controls[field.key].invalid">
                 <p style="color: red"><b>{{errorMessage}}</b></p>
             </div>
         </div>
 
         <div *ngSwitchCase="'password'">
-            <input [formControlName]="field.key" [id]="field.key" [type]="field.type">
+            <input [formControlName]="field.key" [id]="field.key" [type]="field.type"
+                (ngModelChange)="ngOnChanges($event)">
+            <div *ngIf="form.controls[field.key].touched && form.controls[field.key].invalid">
+                <p style="color: red"><b>{{errorMessage}}</b></p>
+            </div>
+        </div>
+
+        <div *ngSwitchCase="'email'">
+            <input [formControlName]="field.key" [id]="field.key" [type]="field.type"
+                (ngModelChange)="ngOnChanges($event)">
+            <div *ngIf="form.controls[field.key].touched && form.controls[field.key].invalid">
+                <p style="color: red"><b>{{errorMessage}}</b></p>
+            </div>
         </div>
 
 
         <div *ngSwitchCase="'dropdown'">
             <label [for]="field.label">{{field.label}}</label>
-            <app-form-field-dropdown [parentForm]="form" [field]="field"></app-form-field-dropdown>
+            <app-form-field-dropdown [parentForm]="form" [field]="field"
+                (ngModelChange)="ngOnChanges($event)"></app-form-field-dropdown>
+            <div *ngIf="form.controls[field.key].touched && form.controls[field.key].invalid">
+                <p style="color: red"><b>{{errorMessage}}</b></p>
+            </div>
+        </div>
+
+        <div *ngSwitchCase="'file'">
+            <label [for]="field.label">{{field.label}}</label>
+            <app-form-field-files [parentForm]="form" [field]="field"
+            (ngModelChange)="ngOnChanges($event)" (change)="updateForm($event)"></app-form-field-files>
+            <!-- <input [type]="field.type" [formControlName]="field.key" [id]="field.key" [name]="field.key" accept="image/png, image/jpeg"> -->
             <div *ngIf="form.controls[field.key].touched && form.controls[field.key].invalid">
                 <p style="color: red"><b>{{errorMessage}}</b></p>
             </div>

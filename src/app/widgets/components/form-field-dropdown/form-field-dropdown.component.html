@@ -1,10 +1,11 @@
+
+
+
 <form [formGroup]="parentForm">
-    <select [formControlName]="field.key" [id]="field.key" (change)="oneInputChange($event)" name="field.key" id="field.key">
+    <select [formControlName]="field.key" [id]="field.key" (change)="oneInputChange($event)" name="field.key"
+        id="field.key">
         <option *ngFor="let opt of field.options" [value]="opt.value">
-                {{opt.value}}
+            {{opt.value}}
         </option>
     </select>
 </form>
-<!-- <div *ngIf="!isValid">
-    <span class="error-message">Is required</span>
-</div> -->

@@ -18,6 +18,8 @@ export class DynamicFormBasicComponent {
   public form!: FormGroup;
   initialForm!: FormGroup;
   payLoad = '';
+  formData!: FormData;
+  isFormData: boolean = false;
 
   @Input() submitLabel = 'Submit';
   @Input() formId = 'dynamic-form-id';
@@ -41,17 +43,31 @@ export class DynamicFormBasicComponent {
   initForm() {
     this.form = this.toFormsControlService.toFormGroup(this.fields);
     this.initialForm = this.toFormsControlService.toFormGroup(this.fields);
+    let inputData;
     this.form.valueChanges.pipe()
       .subscribe((next) => {
-        // console.log('next value is: ', next)
         this.onFormChange.emit(next);
         this.onFormValidation.emit(this.form.valid);
       });
-      // console.log('initForm in dynamic basic form: ', this.form.value);
   }
 
   onSubmit() {
     this.payLoad = JSON.stringify(this.form.value);
     this.onSave.emit(this.form.value);
+  }
+
+  changeValueForm(event: any){
+    console.log('event: ', event.target.id);
+    
+    if(event.target.id == 'file'){
+      this.form.controls['file'].setValue(event.target.files[0]);
+      // this.form?.get('file')?.setValue(event.target.files[0]); 
+    }
+    if(this.form.hasOwnProperty('files')){
+      for (const [key, val] of Object.entries(this.initialForm.value)) {
+        console.log(`${key}: ${val}`);
+        // this.formData.append(key, val);
+      }
+    }
   }
 }

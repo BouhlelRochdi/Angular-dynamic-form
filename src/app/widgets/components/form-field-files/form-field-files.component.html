@@ -1,0 +1,5 @@
+
+
+<form [formGroup]="parentForm">
+    <input [type]="field.type" [formControlName]="field.key" [id]="field.key" (change)="oneInputChange($event)" [name]="field.key" accept="image/png, image/jpeg">
+</form>

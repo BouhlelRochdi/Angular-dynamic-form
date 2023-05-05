@@ -1,14 +1,15 @@
-import { Component, Input, OnChanges, OnInit, Pipe, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DynamicFieldDtoBase } from '../../enums';
 import { FormFieldDropdownComponent } from '../form-field-dropdown/form-field-dropdown.component';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { FormFieldFilesComponent } from '../form-field-files/form-field-files.component';
 
 @Component({
   selector: 'app-form-fields',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, FormFieldDropdownComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, FormFieldDropdownComponent, FormFieldFilesComponent],
   templateUrl: './form-fields.component.html',
   styleUrls: ['./form-fields.component.scss']
 })
@@ -29,7 +30,7 @@ export class FormFieldsComponent implements OnInit, OnChanges {
   get isValid() {
     return this.form.controls[this.field.key].valid;
   }
-
+  @Output() changeValueForm = new EventEmitter<any>();
   initForm!: FormGroup;
 
   submit() {
@@ -37,9 +38,11 @@ export class FormFieldsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    // console.log('fields >>> ', this.field)
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: any) {
+    // console.log('changes: ', changes);
     let error = this.form?.controls[this.field.key]?.errors as object;
     if (error) {
       let keys: any = Object.keys(error);
@@ -48,6 +51,8 @@ export class FormFieldsComponent implements OnInit, OnChanges {
         switch (element) {
           case 'required':
             return this.errorMessage = 'This field is required';
+          case 'email':
+            return this.errorMessage = 'input is not a valid email';
           case 'minlength':
             return this.errorMessage = `min length is ${value[0]['requiredLength']}`;
           case 'maxlength':
@@ -63,6 +68,10 @@ export class FormFieldsComponent implements OnInit, OnChanges {
         }
       });
     }
+  }
+
+  updateForm(event: any) {
+    this.changeValueForm.emit(event.target.files[0]);
   }
 
 }

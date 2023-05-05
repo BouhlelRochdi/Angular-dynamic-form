@@ -2,21 +2,14 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DynamicFieldDtoBase } from '../enums';
 
-
-@Injectable(
-  {
-    providedIn: 'root'
-  }
-)
+@Injectable({ providedIn: 'root' })
 export class ToFormsControlService {
-
 
   toFormGroup(fields: DynamicFieldDtoBase[]) {
     const group: any = {};
 
     fields.forEach(field => {
       let validatorInput: any = this.addValidator(field.rules);
-      console.log('validatorInput: ', validatorInput)
       group[field.key] = new FormControl(field.value, validatorInput)
 
     });
@@ -27,12 +20,9 @@ export class ToFormsControlService {
     if (!rules) {
       return [];
     }
-
     const validators = Object.keys(rules).map((rule) => {
-
+      // console.log('rule: ', rule)
       switch (rule) {
-
-
         case "required":
           return Validators.required;
         case "min":
@@ -40,7 +30,7 @@ export class ToFormsControlService {
         case "max":
           return Validators.max(rules[rule]);
         case "email":
-          return Validators.email(rules[rule]);
+          return Validators.email;
         case "minLength":
           return Validators.minLength(rules[rule]);
         case "maxLength":

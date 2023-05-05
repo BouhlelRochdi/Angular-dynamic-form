@@ -19,6 +19,7 @@ export interface DynamicFieldDtoBase {
   options?: any[];
   rules?: {
     required?: boolean,
+    email?: string,
     minLength?: number,
     maxLength?: number,
     min?: number,

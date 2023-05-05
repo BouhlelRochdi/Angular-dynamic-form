@@ -2,7 +2,7 @@
     <div class="p-grid">
         <!-- call dynamic profile -->
         <div *ngFor="let field of fields; let index =index">
-            <app-form-fields [field]="field" [form]="form"></app-form-fields>
+            <app-form-fields [field]="field" [form]="form" (change)="changeValueForm($event)" ></app-form-fields>
         </div>
 
         <!-- button section  -->
