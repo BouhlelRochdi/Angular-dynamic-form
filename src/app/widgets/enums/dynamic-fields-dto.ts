@@ -1,4 +1,5 @@
-import { OptionOfFieldDtoBase } from "./option-field-dto-base";
+import { OptionOfFieldDtoBase } from "./option-field-dto";
+
 
 
 
@@ -16,7 +17,7 @@ export interface DynamicFieldDtoBase {
   isDisable?: string;
   isHide?: string;
   placeholder?: string;
-  options?: any[];
+  options?: OptionOfFieldDtoBase[];
   rules?: {
     required?: boolean,
     email?: string,

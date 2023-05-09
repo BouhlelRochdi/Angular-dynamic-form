@@ -14,11 +14,11 @@ export class FormFieldFilesComponent {
 
   @Input() parentForm!: FormGroup;
   @Input('field') field!: DynamicFieldDtoBase;
-  @Output() updateForm = new EventEmitter<any>();
+  @Output() uploadFile = new EventEmitter<any>();
 
   oneInputChange(event: any) {
     let formData:FormData = new FormData
     formData.append('file', event.target.files[0]);
-    this.updateForm.emit(formData);
+    this.uploadFile.emit(formData);
   }
 }

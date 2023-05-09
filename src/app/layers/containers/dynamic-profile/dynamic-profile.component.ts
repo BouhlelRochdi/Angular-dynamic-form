@@ -21,11 +21,8 @@ export class DunamicProfileComponent {
     // data.entries
   }
 
-  onFormChange(event: any) {
-    // if (event.target.id == 'file') {
-    //   console.log('file in profile component: ', event.target.files[0]);
-    // }
-    console.log('data in profile component: ', event.target.value);
-  }
+  // onFormChange(event: any) {   
+  //   console.log('data in profile component: ', event.target.value);
+  // }
 
 }

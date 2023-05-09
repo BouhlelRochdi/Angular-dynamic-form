@@ -5,11 +5,21 @@ import { DynamicFieldDtoBase } from '../../enums';
 import { FormFieldDropdownComponent } from '../form-field-dropdown/form-field-dropdown.component';
 import { BehaviorSubject } from 'rxjs';
 import { FormFieldFilesComponent } from '../form-field-files/form-field-files.component';
+import { FormFieldDateComponent } from '../form-field-date/form-field-date.component';
+import { FormFieldCheckboxComponent } from '../form-field-checkbox/form-field-checkbox.component';
 
 @Component({
   selector: 'app-form-fields',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, FormFieldDropdownComponent, FormFieldFilesComponent],
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    ReactiveFormsModule, 
+    FormFieldDropdownComponent, 
+    FormFieldFilesComponent, 
+    FormFieldDateComponent,
+    FormFieldCheckboxComponent
+  ],
   templateUrl: './form-fields.component.html',
   styleUrls: ['./form-fields.component.scss']
 })
@@ -38,7 +48,6 @@ export class FormFieldsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    // console.log('fields >>> ', this.field)
   }
 
   ngOnChanges(changes: any) {
@@ -70,8 +79,8 @@ export class FormFieldsComponent implements OnInit, OnChanges {
     }
   }
 
-  updateForm(event: any) {
-    this.changeValueForm.emit(event.target.files[0]);
-  }
+  // uploadFile(event: any) {
+  //   this.changeValueForm.emit(event.target.files[0]);
+  // }
 
 }

@@ -49,8 +49,24 @@
         <div *ngSwitchCase="'file'">
             <label [for]="field.label">{{field.label}}</label>
             <app-form-field-files [parentForm]="form" [field]="field"
-            (ngModelChange)="ngOnChanges($event)" (change)="updateForm($event)"></app-form-field-files>
-            <!-- <input [type]="field.type" [formControlName]="field.key" [id]="field.key" [name]="field.key" accept="image/png, image/jpeg"> -->
+            (ngModelChange)="ngOnChanges($event)"></app-form-field-files>
+            <div *ngIf="form.controls[field.key].touched && form.controls[field.key].invalid">
+                <p style="color: red">{{errorMessage}}</p>
+            </div>
+        </div>
+
+        <div *ngSwitchCase="'datepicker'">
+            <label [for]="field.label">{{field.label}}</label>
+            <app-form-field-date [parentForm]="form" [field]="field"></app-form-field-date>
+            <div *ngIf="form.controls[field.key].touched && form.controls[field.key].invalid">
+                <p style="color: red">{{errorMessage}}</p>
+            </div>
+        </div>
+
+        <div *ngSwitchCase="'checkbox'">
+            <label [for]="field.label">{{field.label}}</label>
+            <app-form-field-checkbox [parentForm]="form" [field]="field"></app-form-field-checkbox>
+            <!-- <app-form-field-date [parentForm]="form" [field]="field"></app-form-field-date> -->
             <div *ngIf="form.controls[field.key].touched && form.controls[field.key].invalid">
                 <p style="color: red">{{errorMessage}}</p>
             </div>

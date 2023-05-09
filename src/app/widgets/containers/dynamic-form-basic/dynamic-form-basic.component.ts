@@ -45,34 +45,32 @@ export class DynamicFormBasicComponent {
       .subscribe((next) => {
         this.onFormChange.emit(next);
         this.onFormValidation.emit(this.form.valid);
+        console.log('form valueChanges ', next);
+        
       });
   }
 
+  // changeValueForm(event: any) {
+  //   if (event.target.id == 'file') {
+  //     console.log('fiiiiiiiiiiiiile: ');
+  //     let file: File = event.target.files[0];
+  //     if (file) {
+  //       let fileName = file.name;
+  //       this.formData.append('file', file, fileName);
+  //     }
+  //     // this.form.controls['file'].setValue(event.target.files[0]);
+  //     // this.form?.get('file')?.setValue(event.target.files[0]);
+  //   }
+  // }
+
   onSubmit() {
     this.payLoad = JSON.stringify(this.form.value);
-    // if(this.form.hasOwnProperty('files')){
-      // for (const [key, val] of Object.entries(this.form.value)) {
-      //   console.log(`${key}: ${val}`);
-      //   // this.formData.append(key, val);
-      // }
-    // }
-    for (const pair of this.formData.entries()) {
-      console.log(`${pair[0]}, ${pair[1]}`);
+    if (this.formData.has('file')) {
+      for (const [key, val] of Object.entries(this.form.value)) {
+        console.log(`==> ${key}: ${val}`);
+      }
+      this.onSave.emit(this.formData);
     }
-    this.onSave.emit(this.form.value);
-  }
-
-  changeValueForm(event: any){
-    console.log('event: ', event.target.files[0]);
-    
-    if(event.target.id == 'file'){
-      this.formData = new FormData();
-      this.formData.append('file', event.target.files[0]);
-      console.log('formData: ', this.formData);
-      this.form.controls['file'].setValue(event.target.files[0]);
-      // this.form?.get('file')?.setValue(event.target.files[0]); 
-    }
-    
-
+    else this.onSave.emit(this.form.value);
   }
 }
