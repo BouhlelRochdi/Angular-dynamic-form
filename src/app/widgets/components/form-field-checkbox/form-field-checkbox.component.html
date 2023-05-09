@@ -1,6 +1,6 @@
 <form [formGroup]="parentForm">
     <div *ngFor="let opt of field.options; let i=index">
-        <input type="checkbox" [value]="opt.value" (change)="onCheckboxChange($event)" />
+        <input [type]="field.type" [value]="opt.value" (change)="onCheckboxChange($event)" />
         {{ opt.name}}
     </div>
 </form>

@@ -1,0 +1,7 @@
+
+<form [formGroup]="parentForm">
+    <div *ngFor="let opt of field.options; let i=index">
+        <input [type]="field.type" [name]="opt.name" [value]="opt.value" (change)="onCheckboxChange($event)" />
+        {{ opt.value}}
+    </div>
+</form>

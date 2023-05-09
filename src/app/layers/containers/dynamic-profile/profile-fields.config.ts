@@ -90,5 +90,12 @@ export const PROFILE_FORM_FIELDS: DynamicFieldDtoBase[] = [
         // rules: {
         //     required: true,
         // }
+    },
+    {
+        key: 'gender',
+        label: 'Gender',
+        controlType: { value: FieldType.radiobuttons },
+        type: 'radio',
+        options: [{ name: 'gender', value: 'Male' }, { name: 'gender', value: 'Female' }, { name: 'gender', value: 'Other' }],
     }
 ];

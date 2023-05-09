@@ -50,19 +50,6 @@ export class DynamicFormBasicComponent {
       });
   }
 
-  // changeValueForm(event: any) {
-  //   if (event.target.id == 'file') {
-  //     console.log('fiiiiiiiiiiiiile: ');
-  //     let file: File = event.target.files[0];
-  //     if (file) {
-  //       let fileName = file.name;
-  //       this.formData.append('file', file, fileName);
-  //     }
-  //     // this.form.controls['file'].setValue(event.target.files[0]);
-  //     // this.form?.get('file')?.setValue(event.target.files[0]);
-  //   }
-  // }
-
   onSubmit() {
     this.payLoad = JSON.stringify(this.form.value);
     if (this.formData.has('file')) {

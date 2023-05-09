@@ -66,7 +66,14 @@
         <div *ngSwitchCase="'checkbox'">
             <label [for]="field.label">{{field.label}}</label>
             <app-form-field-checkbox [parentForm]="form" [field]="field"></app-form-field-checkbox>
-            <!-- <app-form-field-date [parentForm]="form" [field]="field"></app-form-field-date> -->
+            <div *ngIf="form.controls[field.key].touched && form.controls[field.key].invalid">
+                <p style="color: red">{{errorMessage}}</p>
+            </div>
+        </div>
+
+        <div *ngSwitchCase="'radiobuttons'">
+            <label [for]="field.label">{{field.label}}</label>
+            <app-form-field-radio-button [parentForm]="form" [field]="field"></app-form-field-radio-button>
             <div *ngIf="form.controls[field.key].touched && form.controls[field.key].invalid">
                 <p style="color: red">{{errorMessage}}</p>
             </div>

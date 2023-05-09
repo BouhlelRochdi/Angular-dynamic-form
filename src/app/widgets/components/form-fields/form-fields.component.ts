@@ -1,12 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DynamicFieldDtoBase } from '../../enums';
 import { FormFieldDropdownComponent } from '../form-field-dropdown/form-field-dropdown.component';
-import { BehaviorSubject } from 'rxjs';
 import { FormFieldFilesComponent } from '../form-field-files/form-field-files.component';
 import { FormFieldDateComponent } from '../form-field-date/form-field-date.component';
 import { FormFieldCheckboxComponent } from '../form-field-checkbox/form-field-checkbox.component';
+import { FormFieldRadioButtonComponent } from '../form-field-radio-button/form-field-radio-button.component';
 
 @Component({
   selector: 'app-form-fields',
@@ -18,15 +18,15 @@ import { FormFieldCheckboxComponent } from '../form-field-checkbox/form-field-ch
     FormFieldDropdownComponent, 
     FormFieldFilesComponent, 
     FormFieldDateComponent,
-    FormFieldCheckboxComponent
+    FormFieldCheckboxComponent,
+    FormFieldRadioButtonComponent
   ],
   templateUrl: './form-fields.component.html',
   styleUrls: ['./form-fields.component.scss']
 })
-export class FormFieldsComponent implements OnInit, OnChanges {
+export class FormFieldsComponent implements OnChanges {
 
   errorMessage: string = '';
-  errorMsg: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private _field: any;
   @Input('field')
   set field(value: DynamicFieldDtoBase) {
@@ -47,11 +47,7 @@ export class FormFieldsComponent implements OnInit, OnChanges {
     console.log('submitting form in form fields component: ', this.initForm);
   }
 
-  ngOnInit(): void {
-  }
-
   ngOnChanges(changes: any) {
-    // console.log('changes: ', changes);
     let error = this.form?.controls[this.field.key]?.errors as object;
     if (error) {
       let keys: any = Object.keys(error);
@@ -78,9 +74,4 @@ export class FormFieldsComponent implements OnInit, OnChanges {
       });
     }
   }
-
-  // uploadFile(event: any) {
-  //   this.changeValueForm.emit(event.target.files[0]);
-  // }
-
 }
