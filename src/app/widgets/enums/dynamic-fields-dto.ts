@@ -18,6 +18,7 @@ export interface DynamicFieldDtoBase {
   isHide?: string;
   placeholder?: string;
   options?: OptionOfFieldDtoBase[];
+  childFormFields?: DynamicFieldDtoBase[];
   rules?: {
     required?: boolean,
     email?: string,

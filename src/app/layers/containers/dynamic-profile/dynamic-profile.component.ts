@@ -18,7 +18,6 @@ export class DunamicProfileComponent {
   saveProfile(data: any) {
     console.log('data in profile component: ', data);
     // this.updateProfile.emit(data);
-    // data.entries
   }
 
   // onFormChange(event: any) {   

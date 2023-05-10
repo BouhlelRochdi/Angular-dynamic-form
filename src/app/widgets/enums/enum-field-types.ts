@@ -11,5 +11,6 @@ export enum FieldType {
     multiselection = 'multiselection',
     iconpicker = 'iconpicker',
     file = 'file',
-    custom = 'custom'
+    custom = 'custom',
+    listinputs = 'listinputs',
 }

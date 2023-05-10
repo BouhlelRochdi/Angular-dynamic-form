@@ -1,20 +1,23 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { DynamicFieldDtoBase } from '../../enums';
 import { ToFormsControlService } from '../../services/to-form-control.service';
 import { FormFieldsComponent } from '../../components/form-fields/form-fields.component';
+import { FormFieldListInputsComponent } from '../../components/form-field-list-inputs/form-field-list-inputs.component';
 
 @Component({
   selector: 'app-dynamic-form-basic',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, FormFieldsComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, FormFieldsComponent, FormFieldListInputsComponent],
   templateUrl: './dynamic-form-basic.component.html',
   styleUrls: ['./dynamic-form-basic.component.scss']
 })
 export class DynamicFormBasicComponent {
 
   @ViewChild('dForm', { static: false }) dForm!: NgForm;
+  @ContentChild('fieldItemTemplate', { read: TemplateRef, static: false }) fieldItemTempl!: TemplateRef<any>;
+
   public form!: FormGroup;
   payLoad = '';
   formData: FormData = new FormData();
@@ -37,7 +40,8 @@ export class DynamicFormBasicComponent {
   @Output() onFormChange = new EventEmitter<any>();
   @Output() onFormValidation = new EventEmitter<boolean>();
 
-  constructor(private toFormsControlService: ToFormsControlService) { }
+  constructor(private toFormsControlService: ToFormsControlService) {     
+  }
 
   initForm() {
     this.form = this.toFormsControlService.toFormGroup(this.fields);
